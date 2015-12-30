@@ -25,3 +25,7 @@ Files `category_*.csv`:
 ```
 "Forum ID";"Forum Name";"Topic ID";"Info Hash";"Topic Name";"Size (in bytes)";"Torrent registration date"
 ```
+
+## Attention!
+
+Web interface not yet implemented. Be patient.
