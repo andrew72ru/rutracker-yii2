@@ -6,6 +6,7 @@ Yii2 application for retracer torrents database
 1. Clone this repository to server / localhost / whatever;
 1. cd project folder, `composer install`;
 1. `./init`
+1. `./yii migrate`
 1. Download Rutracker torrents listing from [here](http://rutracker.org/forum/viewtopic.php?t=4824458);
 1. Place last version of downloaded files (e. g. `20150204`) to `project_folder/frontend/runtime/csv`;
 1. Run `./yii import/import`
