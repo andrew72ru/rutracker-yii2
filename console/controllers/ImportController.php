@@ -14,7 +14,6 @@ use common\models\Torrents;
 use Yii;
 use yii\console\Controller;
 use yii\helpers\Console;
-use yii\helpers\VarDumper;
 
 /**
  * Импорт раздач и категорий из csv-файлов
@@ -26,6 +25,10 @@ class ImportController extends Controller
 {
     public $color = true;
 
+    /**
+     * Инструкция
+     * @return int
+     */
     public function actionIndex()
     {
         $this->stdout("Default: import/import [file_path]. \nDefault file path is frontend/runtime/csv\n\n");
@@ -33,6 +36,12 @@ class ImportController extends Controller
         return Controller::EXIT_CODE_NORMAL;
     }
 
+    /**
+     * Основная функция импорта
+     *
+     * @param string $path
+     * @return int
+     */
     public function actionImport($path = 'frontend/runtime/csv')
     {
         $fullPath = Yii::getAlias('@' . $path);
@@ -69,6 +78,12 @@ class ImportController extends Controller
         return Controller::EXIT_CODE_NORMAL;
     }
 
+    /**
+     * Импорт торрентов
+     *
+     * @param \common\models\Categories $cat
+     * @param                           $path
+     */
     private function importTorrents(Categories $cat, $path)
     {
         $filePath = Yii::getAlias('@' . $path . DIRECTORY_SEPARATOR . $cat->file_name);
@@ -79,7 +94,7 @@ class ImportController extends Controller
             while (($data = fgetcsv($handle, 0, ";")) !== FALSE)
             {
                 $row++;
-                $this->stdout("Row {$row}:\n");
+                $this->stdout("Row {$row} of category \"{$cat->category_name}\":\n");
 
                 $model = Torrents::findOne(['forum_id' => $data[0], 'topic_id' => $data[2]]);
 
