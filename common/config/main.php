@@ -6,4 +6,14 @@ return [
             'class' => 'yii\caching\FileCache',
         ],
     ],
+    'modules' => [
+        'gii' => [
+            'class' => 'yii\gii\Module',
+            'generators' => [
+                'sphinxModel' => [
+                    'class' => 'yii\sphinx\gii\model\Generator'
+                ]
+            ]
+        ]
+    ]
 ];
