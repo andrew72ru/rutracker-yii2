@@ -28,6 +28,10 @@ Files `category_*.csv`:
 "Forum ID";"Forum Name";"Topic ID";"Info Hash";"Topic Name";"Size (in bytes)";"Torrent registration date"
 ```
 
+## Sphinx configuration
+
+Example [here](spinx.conf.md).
+
 ## Attention!
 
 Web interface not yet implemented. Be patient.
