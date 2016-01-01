@@ -29,5 +29,6 @@ return [
     'Size' => 'Размер',
     'Topic ID' => 'ID раздачи',
     'Topic Name' => 'Название',
+    'Topic not found' => 'Не найдено',
     'Torrent Registered Date' => 'Дата регистрации',
 ];

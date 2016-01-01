@@ -16,6 +16,10 @@ use yii\sphinx\ActiveRecord;
  * @property integer $size_attr
  * @property integer $datetime_attr
  * @property string $topic_name
+ * @property string $topic_id
+ * @property integer $topic_id_attr
+ * @property integer $category_attr
+ * @property string $category_id
  * @property string $name_attr
  */
 class TorrentSearch extends ActiveRecord
@@ -38,9 +42,9 @@ class TorrentSearch extends ActiveRecord
             [['id'], 'unique'],
             [['id'], 'integer'],
             [['id_attr'], 'integer'],
-            [['topic_name'], 'string'],
+            [['topic_name', 'topic_id', 'category_id'], 'string'],
             [['name_attr'], 'string'],
-            [['id', 'size_attr', 'datetime_attr', 'id_attr'], 'integer'],
+            [['id', 'size_attr', 'datetime_attr', 'id_attr', 'topic_id_attr', 'category_attr'], 'integer'],
             [['size', 'datetime', 'topic_name', 'name_attr'], 'string']
         ];
     }
@@ -59,6 +63,7 @@ class TorrentSearch extends ActiveRecord
             'topic_name' => Yii::t('app', 'Topic Name'),
             'size_attr' => Yii::t('app', 'Size'),
             'datetime_attr' => Yii::t('app', 'Torrent Registered Date'),
+            'category_attr' => Yii::t('app', 'Category Name'),
         ];
     }
 
@@ -69,7 +74,6 @@ class TorrentSearch extends ActiveRecord
     public function search($params)
     {
         $query = self::find();
-        $query->from('torrentz');
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
@@ -77,10 +81,11 @@ class TorrentSearch extends ActiveRecord
         $this->load($params);
 
         $query->match($this->name_attr);
+        $query->filterWhere(['category_attr' => $this->category_attr]);
         $query->showMeta(true);
 
         $dataProvider->sort = [
-            'defaultOrder' => ['datetime_attr' => SORT_DESC],
+            'defaultOrder' => ['category_attr' => SORT_ASC, 'datetime_attr' => SORT_DESC],
         ];
 
         return $dataProvider;
