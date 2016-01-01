@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1fedb6450f2220fadca210c4fa6ca588",
-    "content-hash": "c1972c842292980bcc4b4e50c610fc12",
+    "hash": "26479af7febf095705f9d348985ee47e",
+    "content-hash": "8d4485d30cfe9d92e789ae39d342d6d1",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -180,12 +180,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/jquery-pjax.git",
-                "reference": "9c8ed9fa38442d619818185ccffb04f2988d0022"
+                "reference": "3bceef03fa80ceee8da5854fa3249df1afc871cd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/jquery-pjax/zipball/9c8ed9fa38442d619818185ccffb04f2988d0022",
-                "reference": "9c8ed9fa38442d619818185ccffb04f2988d0022",
+                "url": "https://api.github.com/repos/yiisoft/jquery-pjax/zipball/3bceef03fa80ceee8da5854fa3249df1afc871cd",
+                "reference": "3bceef03fa80ceee8da5854fa3249df1afc871cd",
                 "shasum": ""
             },
             "require": {
@@ -209,7 +209,8 @@
             },
             "license": [
                 "MIT"
-            ]
+            ],
+            "time": "2015-12-31 08:33:51"
         },
         {
             "name": "cebe/markdown",
@@ -374,12 +375,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "0267c425bf6f4500b08c3921cf442f0f3bd46ae4"
+                "reference": "614b3ab64688d39c1a512a17e63eec5a34c497cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/0267c425bf6f4500b08c3921cf442f0f3bd46ae4",
-                "reference": "0267c425bf6f4500b08c3921cf442f0f3bd46ae4",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/614b3ab64688d39c1a512a17e63eec5a34c497cf",
+                "reference": "614b3ab64688d39c1a512a17e63eec5a34c497cf",
                 "shasum": ""
             },
             "require": {
@@ -460,7 +461,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2015-12-27 21:07:36"
+            "time": "2015-12-31 08:33:17"
         },
         {
             "name": "yiisoft/yii2-bootstrap",
@@ -558,6 +559,56 @@
                 "yii2"
             ],
             "time": "2015-12-01 20:06:03"
+        },
+        {
+            "name": "yiisoft/yii2-sphinx",
+            "version": "2.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiisoft/yii2-sphinx.git",
+                "reference": "5ab9be322138ec76ddfd06ad77df1a5590816ed9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/yii2-sphinx/zipball/5ab9be322138ec76ddfd06ad77df1a5590816ed9",
+                "reference": "5ab9be322138ec76ddfd06ad77df1a5590816ed9",
+                "shasum": ""
+            },
+            "require": {
+                "ext-pdo": "*",
+                "ext-pdo_mysql": "*",
+                "yiisoft/yii2": ">=2.0.4"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "yii\\sphinx\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Paul Klimov",
+                    "email": "klimov.paul@gmail.com"
+                }
+            ],
+            "description": "Sphinx full text search engine extension for the Yii framework",
+            "keywords": [
+                "active-record",
+                "fulltext",
+                "search",
+                "sphinx",
+                "yii2"
+            ],
+            "time": "2015-09-23 17:31:03"
         },
         {
             "name": "yiisoft/yii2-swiftmailer",
@@ -773,12 +824,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-debug.git",
-                "reference": "4d6056e3ec68d3db21e9a1878e5dcb7f418b1aaa"
+                "reference": "7a28977497e43bf7180a793389e6a5739ec52756"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/4d6056e3ec68d3db21e9a1878e5dcb7f418b1aaa",
-                "reference": "4d6056e3ec68d3db21e9a1878e5dcb7f418b1aaa",
+                "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/7a28977497e43bf7180a793389e6a5739ec52756",
+                "reference": "7a28977497e43bf7180a793389e6a5739ec52756",
                 "shasum": ""
             },
             "require": {
@@ -812,7 +863,7 @@
                 "debugger",
                 "yii2"
             ],
-            "time": "2015-12-15 10:11:10"
+            "time": "2015-12-31 16:25:50"
         },
         {
             "name": "yiisoft/yii2-faker",
