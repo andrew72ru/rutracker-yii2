@@ -25,7 +25,9 @@ return [
     'Forum Name' => 'Название форума',
     'Hash' => 'Хэш раздачи',
     'ID' => 'ID',
+    'Rutracker Torrents Search' => 'Rutracker Torrents Search',
     'Size' => 'Размер',
     'Topic ID' => 'ID раздачи',
     'Topic Name' => 'Название',
+    'Torrent Registered Date' => 'Дата регистрации',
 ];
