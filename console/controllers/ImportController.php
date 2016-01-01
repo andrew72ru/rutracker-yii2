@@ -94,12 +94,26 @@ class ImportController extends Controller
             while (($data = fgetcsv($handle, 0, ";")) !== FALSE)
             {
                 $row++;
-                $this->stdout("Row {$row} of category \"{$cat->category_name}\":\n");
 
                 $model = Torrents::findOne(['forum_id' => $data[0], 'topic_id' => $data[2]]);
+		if($model !== null)
+		    continue;
+
+                $this->stdout("Row {$row} of category \"{$cat->category_name}\":\n");
 
                 if($model === null)
                 {
+		    if(isset($data[4]))
+			$data[4] = str_replace('\\', '/', $data[4]);
+
+		    if(!isset($data[0]) || !isset($data[1]) || !isset($data[2]) || !isset($data[3]) || !isset($data[4]) || !isset($data[5]) || !isset($data[6]))
+		    {
+			$this->stdout("Error! Undefined Field!\n", Console::FG_RED);
+			\yii\helpers\VarDumper::dump($data);
+			$this->stdout("\n");
+			continue;
+		    }
+
                     $model = new Torrents([
                         'forum_id' => $data[0],
                         'forum_name' => $data[1],
