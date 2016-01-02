@@ -106,7 +106,13 @@ class TorrentSearch extends ActiveRecord
         $query = Subcategory::find();
         if ($id != null && ($cat = Categories::findOne($id)) !== null)
         {
-            $subcatsArr = array_keys(self::find()->where(['category_attr' => $id])->indexBy('forum_name_id_attr')->asArray()->all());
+            $subcatsArr = array_keys(self::find()
+                ->where(['category_attr' => $id])
+                ->groupBy('forum_name_id_attr')
+                ->indexBy('forum_name_id_attr')
+                ->limit(10000)
+                ->asArray()
+                ->all());
             $query->andWhere(['id' => $subcatsArr]);
         }
 
