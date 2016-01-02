@@ -7,7 +7,7 @@
  * File: index.php
  *
  * @var \yii\web\View $this
- * @var \common\models\TorrentSearch $searchModel
+ * @var TorrentSearch $searchModel
  * @var \yii\sphinx\ActiveDataProvider $dataProvider
  */
 
@@ -16,8 +16,8 @@ $this->title = Yii::t('app', 'Rutracker Torrents Search');
 use common\models\Categories;
 use common\models\Subcategory;
 use common\models\Torrents;
+use common\models\TorrentSearch;
 use yii\grid\GridView;
-use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\Pjax;
 
@@ -46,7 +46,7 @@ use yii\widgets\Pjax;
         [
             'attribute' => 'category_attr',
             'value' => function($model) { return Categories::findOne($model['category_attr'])->category_name; },
-            'filter' => ArrayHelper::map(Categories::find()->all(), 'id', 'category_name'),
+            'filter' => TorrentSearch::catForSubs($searchModel->forum_name_id_attr),
         ],
         [
             'attribute' => 'forum_name_id_attr',
@@ -54,7 +54,7 @@ use yii\widgets\Pjax;
             'contentOptions' => [
                 'style' => ['white-space' => 'normal'],
             ],
-            'filter' => ArrayHelper::map(Subcategory::find()->all(), 'id', 'forum_name'),
+            'filter' => TorrentSearch::subsForCat($searchModel->category_attr),
         ],
         [
             'attribute' => 'size_attr',

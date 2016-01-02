@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 use yii\sphinx\ActiveDataProvider;
 use yii\sphinx\ActiveRecord;
 
@@ -92,5 +93,42 @@ class TorrentSearch extends ActiveRecord
         ];
 
         return $dataProvider;
+    }
+
+    /**
+     * Возвращает массив подкатегорий (forum_name) для переданной категории
+     *
+     * @param null|integer $id
+     * @return array
+     */
+    public static function subsForCat($id = null)
+    {
+        $query = Subcategory::find();
+        if ($id != null && ($cat = Categories::findOne($id)) !== null)
+        {
+            $subcatsArr = array_keys(self::find()->where(['category_attr' => $id])->indexBy('forum_name_id_attr')->asArray()->all());
+            $query->andWhere(['id' => $subcatsArr]);
+        }
+
+        return ArrayHelper::map($query->asArray()->all(), 'id', 'forum_name');
+    }
+
+    /**
+     * Возвращает массив с одной категорией, если передана подкатегория
+     *
+     * @param null|integer $id
+     * @return array
+     */
+    public static function catForSubs($id = null)
+    {
+        $query = Categories::find();
+        if($id != null && ($subCat = Subcategory::findOne($id)) !== null)
+        {
+            /** @var TorrentSearch $category */
+            $category = self::find()->where(['forum_name_id_attr' => $id])->one();
+            $query->andWhere(['id' => $category->category_attr]);
+        }
+
+        return ArrayHelper::map($query->asArray()->all(), 'id', 'category_name');
     }
 }
