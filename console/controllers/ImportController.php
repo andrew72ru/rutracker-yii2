@@ -10,10 +10,12 @@
 namespace console\controllers;
 
 use common\models\Categories;
+use common\models\Subcategory;
 use common\models\Torrents;
 use Yii;
 use yii\console\Controller;
 use yii\helpers\Console;
+use yii\helpers\VarDumper;
 
 /**
  * Импорт раздач и категорий из csv-файлов
@@ -88,7 +90,7 @@ class ImportController extends Controller
     {
         $filePath = Yii::getAlias('@' . $path . DIRECTORY_SEPARATOR . $cat->file_name);
 
-        $row = 1;
+        $row = 0;
         if (($handle = fopen($filePath, "r")) !== FALSE)
         {
             while (($data = fgetcsv($handle, 0, ";")) !== FALSE)
@@ -96,23 +98,34 @@ class ImportController extends Controller
                 $row++;
 
                 $model = Torrents::findOne(['forum_id' => $data[0], 'topic_id' => $data[2]]);
-        if($model !== null)
-            continue;
+                if($model !== null)
+                    continue;
 
-                $this->stdout("Row {$row} of category \"{$cat->category_name}\":\n");
+
+                // Subcategory
+                $subcat = $this->importSubcategory($data[1]);
+                if(!($subcat instanceof Subcategory))
+                {
+                    $this->stderr("Error! Unable to import subcategory!");
+                    $this->stdout("\n");
+                    continue;
+                }
+
+                $this->stdout("Row {$row} of category \"{$cat->category_name}\" ");
+                $this->stdout("and subcategory \"{$subcat->forum_name}\": ");
 
                 if($model === null)
                 {
-            if(isset($data[4]))
-            $data[4] = str_replace('\\', '/', $data[4]);
+                    if(isset($data[4]))
+                    $data[4] = str_replace('\\', '/', $data[4]);
 
-            if(!isset($data[0]) || !isset($data[1]) || !isset($data[2]) || !isset($data[3]) || !isset($data[4]) || !isset($data[5]) || !isset($data[6]))
-            {
-            $this->stdout("Error! Undefined Field!\n", Console::FG_RED);
-            \yii\helpers\VarDumper::dump($data);
-            $this->stdout("\n");
-            continue;
-            }
+                    if(!isset($data[0]) || !isset($data[1]) || !isset($data[2]) || !isset($data[3]) || !isset($data[4]) || !isset($data[5]) || !isset($data[6]))
+                    {
+                    $this->stderr("Error! Undefined Field!\n", Console::FG_RED);
+                    \yii\helpers\VarDumper::dump($data);
+                    $this->stdout("\n");
+                    continue;
+                    }
 
                     $model = new Torrents([
                         'forum_id' => $data[0],
@@ -125,6 +138,7 @@ class ImportController extends Controller
                         'category_id' => $cat->id,
                     ]);
                 }
+                $model->forum_name_id = $subcat->id;
                 if($model->save())
                 {
                     $this->stdout("Torrent \t");
@@ -135,6 +149,28 @@ class ImportController extends Controller
                 $this->stdout("\n");
             }
         }
+    }
+
+    /**
+     * Создание подкатегории (forum_name)
+     *
+     * @param string $subcat_name
+     * @return bool|Subcategory
+     */
+    private function importSubcategory($subcat_name)
+    {
+        $model = Subcategory::findOne(['forum_name' => $subcat_name]);
+        if($model === null)
+            $model = new Subcategory(['forum_name' => $subcat_name]);
+
+        if($model->save())
+            return $model;
+        else
+        {
+            VarDumper::dump($model->errors);
+        }
+
+        return false;
     }
 
     /**
