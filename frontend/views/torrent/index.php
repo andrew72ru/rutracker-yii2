@@ -14,6 +14,7 @@
 $this->title = Yii::t('app', 'Rutracker Torrents Search');
 
 use common\models\Categories;
+use common\models\Subcategory;
 use common\models\Torrents;
 use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
@@ -46,6 +47,14 @@ use yii\widgets\Pjax;
             'attribute' => 'category_attr',
             'value' => function($model) { return Categories::findOne($model['category_attr'])->category_name; },
             'filter' => ArrayHelper::map(Categories::find()->all(), 'id', 'category_name'),
+        ],
+        [
+            'attribute' => 'forum_name_id_attr',
+            'value' => function($model) { return Subcategory::findOne($model['forum_name_id_attr'])->forum_name; },
+            'contentOptions' => [
+                'style' => ['white-space' => 'normal'],
+            ],
+            'filter' => ArrayHelper::map(Subcategory::find()->all(), 'id', 'forum_name'),
         ],
         [
             'attribute' => 'size_attr',

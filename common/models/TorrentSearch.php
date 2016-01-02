@@ -21,6 +21,7 @@ use yii\sphinx\ActiveRecord;
  * @property integer $category_attr
  * @property string $category_id
  * @property string $name_attr
+ * @property integer $forum_name_id_attr
  */
 class TorrentSearch extends ActiveRecord
 {
@@ -44,7 +45,7 @@ class TorrentSearch extends ActiveRecord
             [['id_attr'], 'integer'],
             [['topic_name', 'topic_id', 'category_id'], 'string'],
             [['name_attr'], 'string'],
-            [['id', 'size_attr', 'datetime_attr', 'id_attr', 'topic_id_attr', 'category_attr'], 'integer'],
+            [['id', 'size_attr', 'datetime_attr', 'id_attr', 'topic_id_attr', 'category_attr', 'forum_name_id_attr'], 'integer'],
             [['size', 'datetime', 'topic_name', 'name_attr'], 'string']
         ];
     }
@@ -64,6 +65,7 @@ class TorrentSearch extends ActiveRecord
             'size_attr' => Yii::t('app', 'Size'),
             'datetime_attr' => Yii::t('app', 'Torrent Registered Date'),
             'category_attr' => Yii::t('app', 'Category Name'),
+            'forum_name_id_attr' => Yii::t('app', 'Forum Name'),
         ];
     }
 
@@ -82,6 +84,7 @@ class TorrentSearch extends ActiveRecord
 
         $query->match($this->name_attr);
         $query->filterWhere(['category_attr' => $this->category_attr]);
+        $query->andFilterWhere(['forum_name_id_attr' => $this->forum_name_id_attr]);
         $query->showMeta(true);
 
         $dataProvider->sort = [

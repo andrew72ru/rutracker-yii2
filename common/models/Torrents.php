@@ -5,7 +5,7 @@ namespace common\models;
 use Yii;
 
 /**
- * This is the model class for table "torrents".
+ * This is the model class for table "{{%torrents}}".
  *
  * @property integer $id
  * @property integer $forum_id
@@ -16,8 +16,10 @@ use Yii;
  * @property integer $size
  * @property integer $datetime
  * @property integer $category_id
+ * @property integer $forum_name_id
  *
  * @property Categories $category
+ * @property Subcategory $forumName
  */
 class Torrents extends \yii\db\ActiveRecord
 {
@@ -26,7 +28,7 @@ class Torrents extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'torrents';
+        return '{{%torrents}}';
     }
 
     /**
@@ -35,14 +37,15 @@ class Torrents extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['forum_id', 'topic_id', 'size', 'datetime', 'category_id'], 'integer'],
+            [['forum_id', 'topic_id', 'size', 'datetime', 'category_id', 'forum_name_id'], 'integer'],
             [['topic_name'], 'string'],
-            [['category_id'], 'required'],
+            [['category_id', 'forum_name_id'], 'required'],
             [['forum_name'], 'string', 'max' => 255],
             [['hash'], 'string', 'max' => 50],
             [['topic_id'], 'unique'],
             [['hash'], 'unique'],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categories::className(), 'targetAttribute' => ['category_id' => 'id']],
+            [['forum_name_id'], 'exist', 'skipOnError' => true, 'targetClass' => Subcategory::className(), 'targetAttribute' => ['forum_name_id' => 'id']],
         ];
     }
 
@@ -61,6 +64,7 @@ class Torrents extends \yii\db\ActiveRecord
             'size' => Yii::t('app', 'Size'),
             'datetime' => Yii::t('app', 'Datetime'),
             'category_id' => Yii::t('app', 'Category ID'),
+            'forum_name_id' => Yii::t('app', 'Forum Name ID'),
         ];
     }
 
@@ -70,5 +74,13 @@ class Torrents extends \yii\db\ActiveRecord
     public function getCategory()
     {
         return $this->hasOne(Categories::className(), ['id' => 'category_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getForumName()
+    {
+        return $this->hasOne(Subcategory::className(), ['id' => 'forum_name_id']);
     }
 }
