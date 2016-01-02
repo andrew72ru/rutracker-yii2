@@ -46,6 +46,11 @@ indexer --config /etc/sphinxsearch/sphinx.conf --rotate --all # If daemon starte
 
 Web-interface shows all torrents in standard Yii2 GridView. Searching through the table grid be with Spinx.
 
-You can access to magnet-link without visit rutracker.
+You can access to magnet-link without visit rutracker or click to torrent name and open rutracker`s torrent page.
 
 ![Screenshoot](screen.png)
+
+## TODO
+
+Search API with rate limit.
+
