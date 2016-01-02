@@ -16,18 +16,13 @@ source torrentz {
     sql_query_pre = SET NAMES utf8
     sql_query_pre = SET CHARACTER SET utf8
 
-    sql_query = SELECT id, \
-        size, \
-        size AS size_attr, \
-        datetime, \
-        datetime as datetime_attr, \
-        id AS id_attr, \
-        topic_name, \
-        topic_name AS name_attr, \
-        topic_id, \
-        topic_id AS topic_id_attr, \
-        category_id, \
-        category_id AS category_attr \
+    sql_query = SELECT id, id AS id_attr, \
+        size, size AS size_attr, \
+        datetime, datetime as datetime_attr, \
+        topic_name, topic_name AS name_attr, \
+        topic_id, topic_id AS topic_id_attr, \
+        category_id, category_id AS category_attr, \
+        forum_name_id, forum_name_id AS forum_name_id_attr \
         FROM torrents
 
     sql_attr_string = name_attr
@@ -36,6 +31,7 @@ source torrentz {
     sql_attr_uint = datetime_attr
     sql_attr_uint = topic_id_attr
     sql_attr_uint = category_attr
+    sql_attr_uint = forum_name_id_attr
 
 }
 
@@ -50,7 +46,7 @@ index torrentz {
 }
 
 indexer {
-    mem_limit = 32M
+    mem_limit = 512M
 }
 
 searchd {
