@@ -32,6 +32,10 @@ Files `category_*.csv`:
 
 Example [here](spinx.conf.md).
 
-## Attention!
+## How it works
 
-Web interface not yet implemented. Be patient.
+Web-interface shows all torrents in standard Yii2 GridView. Searching through the table grid be with Spinx.
+
+You can access to magnet-link without visit rutracker.
+
+![Screenshoot](screen.png)
