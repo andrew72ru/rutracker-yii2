@@ -1,5 +1,5 @@
 # rutracker-yii2
-Yii2 application for retracer torrents database
+Yii2 application for Rutracker.org torrents database
 
 ## How to use:
 
