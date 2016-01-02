@@ -35,6 +35,13 @@ Files `category_*.csv`:
 
 Example [here](spinx.conf.md).
 
+Run index:
+
+```
+indexer --config /etc/sphinxsearch/sphinx.conf --all # For the first run
+indexer --config /etc/sphinxsearch/sphinx.conf --rotate --all # If daemon started
+```
+
 ## How it works
 
 Web-interface shows all torrents in standard Yii2 GridView. Searching through the table grid be with Spinx.
